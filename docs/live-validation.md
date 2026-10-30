@@ -12,7 +12,7 @@
 | HappyHorse i2v | 480P、3 秒任务已完成，返回视频 |
 | HappyHorse r2v | 480P、3 秒任务已完成，返回视频 |
 | wan3.0-video | 720P、5 秒任务已完成，返回视频 |
-| HappyHorse video-edit | 480P 被上游拒绝，已限制为 720P/1080P；720P 复测已提交 |
+| HappyHorse video-edit | 480P 被上游拒绝，已限制为 720P/1080P；720P 复测已成功 |
 | ASR | 返回 HTTP 502 / ASP.UPSTREAM.ERROR；网关报告上游原生接口返回 400，尚未跑通 |
 | 上传 | 使用 TTS 生成的音频上传成功 |
 
