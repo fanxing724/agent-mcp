@@ -180,7 +180,7 @@ async def test_upload_and_query_results():
 
 async def test_agentscope_nested_error_code():
     client = MediaClient(
-        Settings(api_key="test"),
+        Settings(api_key="test-only-secret"),
         httpx.MockTransport(
             lambda r: httpx.Response(
                 502,
@@ -197,3 +197,10 @@ async def test_agentscope_nested_error_code():
     assert exc.value.details["request_id"] == "trace-test"
     assert "private upstream details" not in str(exc.value)
     await client.close()
+
+
+async def test_edit_video_rejects_unsupported_480p(backend):
+    svc, requests = backend
+    with pytest.raises(ValueError, match="720P or 1080P"):
+        await svc.edit_video("https://example.com/a.mp4", "Watercolor", resolution="480P")
+    assert not requests

@@ -218,7 +218,9 @@ class MediaService:
             model,
         )
         if model == "wan3.0-video":
-            result["warning"] = "Wan mapping is provisional; AgentScope live verification pending"
+            result["warning"] = (
+                "Wan text-to-video smoke test passed; other modes and parameter combinations unverified"
+            )
         return result
 
     @staticmethod
@@ -236,6 +238,8 @@ class MediaService:
         resolution: str | None = None,
         seed: int | None = None,
     ) -> dict:
+        if resolution == "480P":
+            raise ValueError("Video editing supports 720P or 1080P; gateway rejects 480P")
         refs = reference_urls or []
         if len(refs) > 5:
             raise ValueError("Video editing accepts at most 5 reference images")

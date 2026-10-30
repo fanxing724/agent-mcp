@@ -112,7 +112,7 @@ async def generate_video(
     seed: int | None = None,
 ) -> dict[str, Any]:
     """Submit video generation; query task_id later. i2v needs image_url; r2v needs 1–9
-    reference_urls. Wan text-only mapping is provisional pending gateway verification.
+    reference_urls. Wan text-only mapping passed one smoke test; other modes are unverified.
     Omit optional parameters to use upstream defaults.
     """
     return await service(ctx).generate_video(
@@ -126,7 +126,7 @@ async def edit_video(
     prompt: str,
     ctx: Context,
     reference_urls: list[str] | None = None,
-    resolution: Literal["480P", "720P", "1080P"] | None = None,
+    resolution: Literal["720P", "1080P"] | None = None,
     seed: int | None = None,
 ) -> dict[str, Any]:
     """Submit HappyHorse video editing with up to five reference images; returns task_id."""
