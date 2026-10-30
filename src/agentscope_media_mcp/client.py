@@ -78,9 +78,12 @@ class MediaClient:
             raise MediaError(
                 "invalid_response", "Expected an object response", request_id=request_id
             )
-        if response.is_error or response.is_redirect or data.get("code"):
+        error = data.get("error") if isinstance(data.get("error"), dict) else {}
+        if response.is_error or response.is_redirect or data.get("code") or error:
             # Do not echo arbitrary upstream messages: they may include user content or secrets.
-            code = self.clean(str(data.get("code") or f"http_{response.status_code}"))
+            code = self.clean(
+                str(data.get("code") or error.get("code") or f"http_{response.status_code}")
+            )
             messages = {
                 401: "Model API Key is missing or rejected",
                 403: "Access to this operation was denied",

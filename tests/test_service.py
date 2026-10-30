@@ -176,3 +176,24 @@ async def test_upload_and_query_results():
     assert result["assets"][0]["type"] == "video"
     assert calls[1].url.path == "/api/v1/tasks/saved-task-123"
     await client.close()
+
+
+async def test_agentscope_nested_error_code():
+    client = MediaClient(
+        Settings(api_key="test"),
+        httpx.MockTransport(
+            lambda r: httpx.Response(
+                502,
+                json={
+                    "error": {"code": "ASP.UPSTREAM.ERROR", "message": "private upstream details"},
+                    "request_id": "trace-test",
+                },
+            )
+        ),
+    )
+    with pytest.raises(MediaError) as exc:
+        await client.request("POST", "/test", {})
+    assert exc.value.details["code"] == "ASP.UPSTREAM.ERROR"
+    assert exc.value.details["request_id"] == "trace-test"
+    assert "private upstream details" not in str(exc.value)
+    await client.close()

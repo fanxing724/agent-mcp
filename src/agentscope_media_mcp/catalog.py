@@ -25,10 +25,10 @@ def list_models(capability: str | None = None) -> dict:
         raise ValueError(f"capability must be one of {sorted(valid)}")
     return {
         "models": [
-            dict(m, verification="not_live_tested")
+            dict(m, verification="see_docs/live-validation.md")
             for m in MODELS
             if capability is None or m["capability"] == capability
         ],
-        "notes": "Model IDs from supplied AgentScope guide; gateway compatibility not live verified. "
-        "Wan native request mapping is provisional. No account/JWT APIs are used.",
+        "notes": "Model IDs from supplied AgentScope guide; see docs/live-validation.md for live results. "
+        "Wan text-to-video mapping has passed one live smoke test. No account/JWT APIs are used.",
     }

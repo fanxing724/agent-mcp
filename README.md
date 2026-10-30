@@ -2,7 +2,7 @@
 
 Python MCP 服务：通过 AgentScope Platform 调用语音、图片、ASR 和视频模型。无网页、无本地模型、无账户 JWT 接口。
 
-**状态：开发版本。全部模型尚未经过 AgentScope 真实调用验证，包尚未公开发布。**
+**状态：开发版本。已开始真实接口联调，逐项结果见 [验证记录](docs/live-validation.md)。PyPI 尚未发布。**
 
 ## 本地启动
 
@@ -87,14 +87,14 @@ uv run python scripts/check_wheel.py
 
 ## 魔搭部署
 
-先发布 PyPI 安装包，再选择 uvx 配置。以下仅为计划，尚未发布：
+可先从 GitHub 安装，选择 uvx 配置；建议将 `main` 换成经过验证的提交号固定版本：
 
 ```json
 {
   "mcpServers": {
     "agentscope-media": {
       "command": "uvx",
-      "args": ["agentscope-media-mcp@0.1.0"],
+      "args": ["--from", "git+https://github.com/fanxing724/agent-mcp.git@main", "agentscope-media-mcp"],
       "env": {"AGENTSCOPE_API_KEY": "<部署时填写>"}
     }
   }

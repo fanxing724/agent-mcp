@@ -28,7 +28,7 @@ mcp = FastMCP(
     "AgentScope Media",
     lifespan=lifespan,
     instructions=(
-        "Speech, image and video tools for AgentScope. Model compatibility is not yet live verified. "
+        "Speech, image and video tools for AgentScope. See docs/live-validation.md for tested capabilities. "
         "Video tools submit asynchronous tasks; save task_id and query get_task later. "
         "Do not automatically resubmit an interrupted generation. Media links may expire. "
         "Supply public media URLs; local paths on a caller's computer are not accessible. "
