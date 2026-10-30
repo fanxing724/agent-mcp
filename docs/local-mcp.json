@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "agentscope-media": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/home/fanxing/repos/agentscope-media-mcp",
+        "run",
+        "--locked",
+        "agentscope-media-mcp"
+      ]
+    }
+  }
+}
